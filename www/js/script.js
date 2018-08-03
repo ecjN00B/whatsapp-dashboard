@@ -99,8 +99,17 @@ function conversa(phone, picture){
         url: "/conversa",
         dataType: "json",
         data: { phone: phone },
+        beforeSend: function() {
+            $('#conversaConteudo').html(``);
+            $('#conversaConteudo').append(`
+            <div class="mask-loading">
+                <figure class="align-loading">
+                    <img class="ajax-spinner img-responsive" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Loading...">
+                </figure>
+            </div>
+            `);
+        },
         success: async function(result){
-            console.log(result);
             $('#conversaConteudo').html(``);
             for(var i=0; i<=result.length; i++) {
 
@@ -113,8 +122,6 @@ function conversa(phone, picture){
                 if(type == "ptt" || type == "audio" || type == "image")
                     src = await fileSrc(result[i].filehash)
 
-                console.log(src);
-
                 if(msg == "Audio")
                     msg = `<audio controls src="${src}"></audio>`;
                 else if(msg == "Image")
@@ -122,9 +129,7 @@ function conversa(phone, picture){
                 else
                     msg = `<p>${msg}</p>`;
 
-                console.log(msgId);
                 var status = await msgStatus(msgId);
-                console.log(status);
 
                 if(status == '1')
                     status = 'Enviado';
