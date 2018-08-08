@@ -102,7 +102,7 @@ function imgError(image){
 
 function conversa(phone, picture){
     $.ajax({
-        beforeSend: function() {
+        beforeSend: function(){
             $('#conversaConteudo').html(``);
             $('#conversaConteudo').append(`
             <div class="mask-loading">
@@ -168,7 +168,7 @@ function conversa(phone, picture){
                     `);
             }
         },
-        error: function () {
+        error: function(){
             alert('Error');
         }
     });
@@ -179,9 +179,13 @@ $(function(){
         e.preventDefault();
 
         $.ajax({
+            beforeSend: function(){
+                $("#searchLoading").show();
+            },
             url: "/perfil",
             dataType: "json",
             success: function(result){
+                $("#searchLoading").hide();
                 $('#tabela > table > thead').html(`
                 <tr>
                     <th>Foto</th>
