@@ -367,13 +367,19 @@
 						<div class="col-8 mx-auto">
 							<form id="form1" class="form-group form-inline">
 							  	<label class="col-sm-4 control-label" for="buttondropdown">PESQUISA RELATÓRIO:</label>
-							  	<div class="col-sm-6">
+							  	<div class="col-sm-5">
 							    	<div class="input-group">
 								      	<input id="buttondropdown" name="buttondropdown" class="form-control" placeholder="Pesquisa..." type="text">
 										
 							    	</div>
 							  	</div>
-							  	<button id="singlebutton" name="singlebutton" class="btn btn-info">PESQUISAR</button>
+								<button id="singlebutton" name="singlebutton" class="btn btn-info">PESQUISAR</button>
+								
+								<div class="mask-loading col-sm-1" id="searchLoading" style="display: none;">
+								<figure class="align-loading" style="display: block; margin: 0 auto;">
+									<img class="ajax-spinner img-responsive" src="images/loading.gif" style="max-width: 3vw; max-height: 3vh" alt="Loading...">
+								</figure>
+								</div>
 							</form>
 						</div>
 
