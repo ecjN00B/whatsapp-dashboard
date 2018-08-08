@@ -1,3 +1,14 @@
+    login = document.getElementById("login");
+    principal = document.getElementById("principal");
+    loading = document.getElementById("principal");
+
+    function load(){
+        loading.style.display = "none";
+        login.style.display = "none";
+        principal.style.display = "block";
+    }
+
+
     $('#bdnNAO').click(function(event) {
        $('#qtdEnvio').val("");
        $('#qtdEnvio').prop('disabled', true);
@@ -174,6 +185,23 @@ function conversa(phone, picture){
     });
 }
 
+
+
+    function graf1(){ 
+         $.ajax({
+            url: "/grafico1",
+            dataType: "json",
+            success: function(result){
+                console.log(result);
+                alert(result[0].qtdee);
+            },
+            error: function (){
+                alert('Deu Pau nos Graficos!!');
+            }
+        });
+     }
+
+
 $(function(){
     $('#form1').bind('submit', function(e) {
         e.preventDefault();
@@ -196,7 +224,7 @@ $(function(){
                 `);
                 for(var i=0; i<result.length; i++) {
                     if(result[i])
-                        $('#tabela > table > thead').append("<tr onclick='conversa(\"" + result[i].phone + "\", \"" + result[i].picture + "\")' data-toggle='modal' data-target='#conversa'><td><img src='" + result[i].picture + "' width='50px' height='50px' onerror='imgError(this);' /></td><td>" + result[i].phone + "</td><td>" + result[i].nick + "</td><td>" + result[i].status + "</td></tr>");
+                        $('#tabela > table > tbody').append("<tr onclick='conversa(\"" + result[i].phone + "\", \"" + result[i].picture + "\")' data-toggle='modal' data-target='#conversa'><td><img src='" + result[i].picture + "' width='50px' height='50px' onerror='imgError(this);' /></td><td>" + result[i].phone + "</td><td>" + result[i].nick + "</td><td>" + result[i].status + "</td></tr>");
                 }
             },
             error: function () {
@@ -222,23 +250,50 @@ $(function(){
 
 
 //GRAFICOS DAQUI PRA BAIXO
+
+
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
     // The data for our dataset
     data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado", "Domingo"],
         datasets: [{
-            label: "Enviados ao destinatário",
-            backgroundColor: 'rgba(33, 150, 243, 0.5)',
-            borderColor: 'rgba(33, 150, 243,1.0)',
+            label: "Quantidade de Envio",
+            backgroundColor: 'rgba(41, 128, 185, 0.9)',
+            borderColor: 'rgba(15, 15, 15, 1)',
             data: [0, 10, 5, 2, 20, 30, 45],
+            borderWidth: 2,
+            pointStyle: 'rectRot',
+            pointRadius: 5,
+            pointBorderColor: 'rgb(0, 0, 0)'
         }]
     },
-
-    // Configuration options go here
-    options: {}
+    options: {
+        responsive: true,
+        legend: {
+            labels: {
+                usePointStyle: false
+            }
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Período'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Valores'
+                }
+            }]
+        }
+    }
 });
 var ctx = document.getElementById("myChart4").getContext('2d');
 var myChart = new Chart(ctx, {

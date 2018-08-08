@@ -15,8 +15,7 @@ a:link{
 }
 
 .btnMenu{
-	background: 
-	width: 140px;
+	width: 120px;
 	height: 45px;
 	border-radius: 0px;
 	margin-left: 2px;
@@ -50,12 +49,10 @@ a:link{
 .btnMenu2:hover{
 	transform: rotate(360deg);
 	margin-right: 0.5rem;
-	margin-left: : 0.5rem;
+	margin-left: 0.5rem;
 }
 
-.btnMenu3{
-	background: 
-	width: 140px;
+.btnMenu3{ 
 	height: 45px;
 	border-radius: 0px;
 	margin-left: 2px;
@@ -67,25 +64,17 @@ a:link{
 .btnMenu3:hover{
 	transform: scale(1.1);
 }
-
-
-
-
 .custab{
     border: 1px solid #ccc;
-    box-shadow: 3px 3px 2px #ccc;
-    transition: 0.5s;
-    }
-.custab:hover{
-    box-shadow: 3px 3px 0px transparent;
-    transition: 0.5s;
-}
-
-#tabela{
-	max-height: 40rem;
+    box-shadow: 2px 2px 1px #ccc;
+    max-height: 40rem;
 	overflow-y: auto;
 }
-
+#lista{
+	max-height: 30rem;
+	min-height: 20rem;
+	overflow-y: auto;
+}
 
 .containerConv {
     border: 2px solid #dedede;
