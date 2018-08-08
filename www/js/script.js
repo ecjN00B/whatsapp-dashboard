@@ -94,6 +94,12 @@ function msgStatus(id){
     return status;
 }
 
+function imgError(image){
+    image.onerror = "";
+    image.src = "/images/user.svg";
+    return true;
+}
+
 function conversa(phone, picture){
     $.ajax({
         beforeSend: function() {
@@ -147,7 +153,7 @@ function conversa(phone, picture){
                 if(me == 0)
                     $('#conversaConteudo').append(`
                         <div class="containerConv">
-                            <img src="${picture}" alt="Avatar" style="width:100%;">
+                            <img src="${picture}" alt="Avatar" style="width:100%;" onerror="imgError(this);" >
                             ${msg}
                             <span class="time-right">Visualizado - ${hour}</span>
                         </div>
@@ -155,7 +161,7 @@ function conversa(phone, picture){
                 else
                     $('#conversaConteudo').append(`
                         <div class="containerConv darker">
-                            <img src="https://www.shareicon.net/data/128x128/2016/09/07/826440_chat_512x512.png" class="right" style="width:100%;">
+                            <img src="images/bot.svg" class="right" style="width:100%;">
                             <p>${msg}</p>
                             <span class="time-left">${status} - ${hour}</span>
                         </div>
