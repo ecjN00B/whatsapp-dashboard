@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+		<title>Dashboard - Josafá</title>
+	</head>
+	<body onload="load();">
+	
+		<div id="login" class="container">
+			
+		</div>
+
+		<div id="loading" class="container">
+			
+		</div>
+
+		
+		<div id="principal" class="container">
+
+			<nav class="navbar fixed-top navbar-expand-lg" style="background: #50514F; box-shadow: 0px 2px 20px #b2bec3;">
+				<a href="#" class="navbrar-brand">
+					<h1 class="logo ml-3" style="font-style: oblique; color: #fff;">JOSAFÁ</h1>
+					
+				</a>
+
+				<button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+					<span class="navbar-toggler-icon"><img src="images/menu.svg"></span>
+				</button>
+
+				<div style="padding-left: 2rem;" class="navbar-collapse collapse" id="navbarMenu">
+					<div class="nav navbar nav-pills" id="v-pills-tab" role="tablist">
+					<button class="btn btn-info active btnMenu" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" style=" box-shadow: none;"><i class="fab fa-fort-awesome-alt"></i>		Principal</button>
+		  			<button class="btn btn-info btnMenu" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="true" style=" box-shadow: none;"><i class="fab fa-whatsapp"></i>		Envio</button>
+		  			<button class="btn btn-info btnMenu disabled" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="true" style=" box-shadow: none;"><i class="fas fa-terminal"></i>		API</button>
+		  			<button class="btn btn-info btnMenu" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="true" style="box-shadow: none;"><i class="far fa-chart-bar"></i>		Relatorios</button>
+		  		</div>
+				</div>
+
+				<button class="btn btn-danger btnMenu2 rounded-circle" style="box-shadow: none;"><i class="far fa-caret-square-down"></i></button>
+				<button class="btn btn-danger btnMenu2 rounded-circle" style="box-shadow: none;"><i class="far fa-bell"></i></button>
+				<button class="btn btn-danger btnMenu2 rounded-circle" style="box-shadow: none;"><i class="fas fa-sliders-h"></i></button>
+				<button class="btn btn-danger btnMenu2 rounded-circle" style="box-shadow: none;"><i class="far fa-user"></i></button>
+				
+
+			</nav>
+
+			<div class="tab-content" id="v-pills-tabContent" style="margin-top: 5rem;">
+
+				<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" style="">
+						<br/>
+
+						<div class="row my-1" style="">
+							
+							<div class="col-sm-8 card">
+							  	<div class="card-body">
+							    	<h4 class="card-titlele text-justify"><h3><i class="far fa-comment-alt"></i> QUANTIDADE DE ENVIO</h4>
+							    	<div class="btn-group float-right" role="group" aria-label="Basic example">
+									  	<button type="button" onclick="graf1();" class="btn btn-danger">Dia</button>
+									  	<button type="button" class="btn btn-danger">Semana</button>
+									  	<button type="button" class="btn btn-danger">30 Dias</button>
+									  	<button type="button" class="btn btn-danger">6 Meses</button>
+									</div>
+							    	<canvas class="card-text" id="myChart">
+							    	</canvas>
+							  	</div>
+							</div>
+
+							<div id="lista" class="card col-sm-4">
+							  	<div class="card-body text-center">
+									<ul class="list-group list-group-flush"> <h3><i class="far fa-list-alt" style="padding-bottom: 20px;"></i>  Ultimas Campanhas</h3>
+									  <li class="list-group-item list-group-item-action">Campanha 1</li>
+									  <li class="list-group-item list-group-item-action">Campanha 2</li>
+									  <li class="list-group-item list-group-item-action">Campanha 3</li>
+									  <li class="list-group-item list-group-item-action">Campanha 4</li>
+									  <li class="list-group-item list-group-item-action">Campanha 5</li>
+									  <li class="list-group-item list-group-item-action">Campanha 6</li>
+									  <li class="list-group-item list-group-item-action">Campanha 7</li>
+									  <li class="list-group-item list-group-item-action">Campanha 7</li>
+									  <li class="list-group-item list-group-item-action">Campanha 7</li>
+									  <li class="list-group-item list-group-item-action">Campanha 7</li>
+									  <li class="list-group-item list-group-item-action">Campanha 7</li>
+									  <li class="list-group-item list-group-item-action">Campanha 7</li>
+									</ul>
+							  	</div>
+							</div>
+
+
+						</div>
+
+						<br/>
+
+						<div class="row">
+							<div class="card col-sm-6">
+								<div class="card-body">
+									<h6 class="card-title text-muted"><i class="far fa-list-alt"></i>Envio de MSG por Campanha</h6>
+									<div class="table-responsive card-text">
+										<div class="card-body">
+								    		<canvas id="myChart7"></canvas>
+										</div>
+										<div class="card-footer text-muted">
+								   	 		Atualizado: 2 min
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="card col-sm-6">
+								<div class="card-body">
+									<h6 class="card-title text-muted"><i class="far fa-list-alt"></i>    Lista de Envio</h6>
+									<div class="table-responsive card-text">
+										<table class="table">
+											<caption>Ultimas Campanhas </caption>
+											  <thead>
+											    <tr>
+											      <th scope="col">Campanha</th>
+											      <th scope="col">Tipo de Envio</th>
+											      <th scope="col">Data</th>
+											      <th scope="col">Estado</th>
+											      <th scope="col">Quantidade</th>
+											    </tr>
+											  </thead>
+											  <tbody>
+											    <tr>
+											      <th scope="row">Marketing Omega 3</th>
+											      <td>Marketing</td>
+											      <td>12/05/2018</td>
+											      <td class="text-danger">Falha</td>
+											      <td class="text-info">12000</td>
+											    </tr>
+											    <tr>
+											      <th scope="row">3000</th>
+											      <td>3000*0,05</td>
+											      <td>18/05/2018</td>
+											      <td class="text-warning">Parcial</td>
+											      <td class="text-info">3000</td>
+											    </tr>
+											    <tr>
+											      <th scope="row">200000</th>
+											      <td>200000*0,05</td>
+											      <td>20/05/2018</td>
+											      <td class="text-success">Success</td>
+											      <td class="text-info">200000</td>
+											    </tr>
+											  </tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row" style="padding-top: 20px;" >
+
+							<div class="card col-sm-4">
+								<div class="card-header">
+									Send Chart
+								</div>
+								<div class="card-body">
+									<h6 class="card-title text-justify"><span style="font-size: 14pt;">Mensagens Respondidas<span>
+									</h6>
+								    <canvas class="card-text" id="myChart4">
+
+								    </canvas>
+								</div>
+								<div class="card-footer text-muted">
+								    Atualizado: 2 min
+								</div>
+							</div>
+
+							<div class="card col-sm-4">
+								<div class="card-header">
+									Send Chart
+								</div>
+								<div class="card-body">
+									<h6 class="card-title text-justify"><span style="font-size: 14pt;">Mensagens Respondidas<span>
+									</h6>
+								    <canvas class="card-text" id="myChart5">
+
+								    </canvas>
+								</div>
+								<div class="card-footer text-muted">
+								    Atualizado: 2 min
+								</div>
+							</div>
+
+
+
+							<div class="card col-sm-4">
+								<div class="card-header">
+									Percentual de Retorno
+								</div>
+								<div class="card-body">
+								    <canvas id="myChart8"></canvas>
+								</div>
+								<div class="card-footer text-muted">
+								    Atualizado: 2 min
+								</div>
+							</div>
+						
+						</div>
+
+
+			  	</div>
+
+
+				<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+					<h1 class="text-center" style="padding-top: 0.5rem; ">Formulario de Envio em Massa</h1>
+
+					<div class="row" style="">
+
+						<form class="align-self-center was-validated container form-control" id="formEnvio" method="post">
+
+							<div class="row" style="padding-bottom: 1rem;">
+
+								<div class="col-sm-6">
+									<label class="" for="nmCampanha">Nome da Campanha:</label>
+							   		<input type="text" class="form-control" id="nmCampanha" placeholder="Campanha..." value="" required>
+							   	</div>
+
+							   	<div class="col-sm-6">
+									<label class="" for="tpCampanha">Tipo da Campanha:</label>
+								    <select id="tpCampanha" class="custom-select" required>
+								      	<option value="">Abra e selecione a opção</option>
+								      	<option value="1">Marketing</option>
+								      	<option value="2">Cobrança</option>
+								      	<option value="3">Verificação</option>
+								    </select>
+								</div>
+								
+							</div>
+
+							<div class="row" style="padding-bottom: 1rem;">
+
+								<div class="col-sm-9">
+									<label for="desc">Descrição:</label>
+							   		<input type="text" class="form-control" id="desc" placeholder="Descrição..." value="" required>
+							   	</div>
+							   	<div class="col-sm-3">
+								   	<label for="anMSG">Análise de Mensagem:</label>
+										<div id="anMSG">
+											<div class="custom-control custom-radio">
+												<input type="radio" class="custom-control-input" id="anSIM" name="radio-stacked" value="1" required>
+											    <label class="custom-control-label" for="anSIM">Sim</label>
+											</div>
+
+											<div class="custom-control custom-radio">
+											    <input type="radio" class="custom-control-input" id="anNAO" name="radio-stacked" value="0" required>
+											    <label class="custom-control-label" for="anNAO">Não</label>
+											</div>
+										</div>
+								</div>
+							</div>
+
+							<div class="row" style="padding-bottom: 1rem;">
+								<div class="col-sm-3">
+									<label for="tpMSG">Tipo de Mensagem:</label>
+								    <select id="tpMSG" class="custom-select" required>
+								      	<option value="">Abra e selecione a opção</option>
+								      	<option value="1">Mensagem</option>
+								      	<option value="2">Video/Imagem/GIF</option>
+								      	<option value="3">Video/Imagem/GIF + Mensagem</option>
+								    </select>
+								</div>
+								<div class="col-sm-6">
+									<label for="txtMSG">Texto da Mensagem: </label>
+									<textarea class="form-control" id="txtMSG" placeholder="Texto da Mensagem..." required style="resize: none"></textarea>
+								</div>
+								<div class="col-sm-3">
+									<div class="custom-file" style="margin-top: 35px;">
+									    <input type="file" class="custom-file-input" id="msgArquivo" required disabled>
+									    <label class="custom-file-label" for="msgArquivo">Arquivo de Envio...</label>
+									    <div class="invalid-feedback">Apenas Arquivo Excel ou TXT</div>
+			  						</div>
+			  					</div>
+
+							</div>
+
+							<div class="row" style="padding-bottom: 1rem;">
+
+								<div class="col-sm-4">
+									<label for="contVCARD">Contato Vcard:</label>
+									<input type="text" class="form-control" id="contVCARD" placeholder="Contato Vcard..." required disabled>
+								</div>
+								<div class="col-sm-1 align-self-center" style="margin-top: 15px;">
+									<input class="form-check-input" type="checkbox" id="VCARD">
+									<label class="form-check-label" for="VCARD">Vcard</label>
+								</div>	
+								
+								<div class="col-sm-3">
+									<div class="custom-file" style="margin-top: 35px;">
+									    <input type="file" class="custom-file-input" id="arquivo" required disabled>
+									    <label class="custom-file-label" for="arquivo">Arquivo de Contato...</label>
+									    <div class="invalid-feedback">Apenas Arquivo Excel ou TXT</div>
+			  						</div>
+			  					</div>
+
+			  					<div class="col-sm-2">
+								   	<label for="BDN">Utilizar nossa base?</label>
+									<div id="BDN">
+										<div class="custom-control custom-radio">
+											<input type="radio" class="custom-control-input" id="bdnSIM" value="1" name="radio-stacked2" required>
+										    <label class="custom-control-label" for="bdnSIM">Sim</label>
+										</div>
+										<div class="custom-control custom-radio">
+										    <input type="radio" class="custom-control-input" id="bdnNAO" value="0" name="radio-stacked2" required>
+										    <label class="custom-control-label" for="bdnNAO">Não</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-2">
+									<label for="qtdEnvio">Qntd envio:</label>
+							   		<input type="text" class="form-control" id="qtdEnvio" placeholder="Somente numeros..." required>
+								</div>
+
+							</div>
+
+							<div class="row">
+								<div class="col-sm-2">
+									<label for="data">Data:</label>
+							   		<input type="text" class="form-control" id="data" placeholder="AAAA-MM-DD" value="" required>
+								</div>
+								<div class="col-sm-2">
+								   	<label for="coletor">Coletor de Respostas:</label>
+										<div class="custom-control custom-radio">
+											<input type="radio" class="custom-control-input" id="clSIM" value="1" name="radio-stacked23" required>
+										    <label class="custom-control-label" for="clSIM">Sim</label>
+										</div>
+										<div class="custom-control custom-radio">
+										    <input type="radio" class="custom-control-input" id="clNAO" value="0" name="radio-stacked23" required>
+										    <label class="custom-control-label" for="clNAO">Não</label>
+										</div>
+								</div>
+								
+								<div class="mx-auto col-sm-7">
+									<ul class="list-group"> 
+										<li class="list-group-item"><p>Legenda:</p> <p>--Campos em vermelho = Preenchidos incorretamente</p><p>--Campos Verdes = Preenchidos corretamente </p></li>
+									</ul>
+								</div>
+
+
+							</div>
+
+							<div class="row" style="padding-bottom: 1rem; padding-top: 3rem;">
+								<div class="col-sm-12">
+									<button class="btn btn-info btn-block btnMenu3" id="enviarBTN" type="submit">ENVIAR FORMULÁRIO</button>
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+					
+				</div>
+				
+				<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+					<h1 class="text-center" style="padding-top: 0.5rem; ">RELATÓRIOS DE CAMPANHAS</h1>
+					<div class="row bg-white" style="padding-top: 20px;">
+						<div class="col-8 mx-auto">
+							<form id="form1" class="form-group form-inline">
+							  	<label class="col-sm-4 control-label" for="buttondropdown">PESQUISA RELATÓRIO:</label>
+							  	<div class="col-sm-6">
+							    	<div class="input-group">
+								      	<input id="buttondropdown" name="buttondropdown" class="form-control" placeholder="Pesquisa..." type="text">
+										
+							    	</div>
+							  	</div>
+							  	<button id="singlebutton" name="singlebutton" class="btn btn-info">PESQUISAR</button>
+							</form>
+						</div>
+
+
+						<br/>
+						<br/>
+						<div class="col-sm-12 text-justify"  id="tabela">
+		    			<table class="table table-responsive-sm custab table-hover">
+			    			<thead class="thead-dark">
+			        			<tr>
+									<th>Foto</th>
+									<th>Telefone</th>
+			            			<th>Nickname</th>
+			            			<th>Status</th>
+			        			</tr>
+			    			</thead>
+			    			<tbody>
+			    			</tbody>
+		    			</table>
+		    			</div>
+		    			<br/>
+		    			<br/>
+
+		    			
+	    			</div>
+
+				</div>
+
+
+			</div>
+
+			</div>
+		</div>
+
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="conversa" tabindex="-1" role="dialog" aria-labelledby="conversaTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="conversaTitle">Conversa</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body" id="conversaConteudo">
+		
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				</div>
+			</div>
+
+
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
+		</script>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/Chart.min.js"></script>
+		<script src="js/jquery.mask.min.js"></script>
+		<script src="js/script.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		
+		
+	</body>
+</html>
