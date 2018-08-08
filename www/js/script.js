@@ -66,8 +66,8 @@ function fileSrc(filehash){
         data: { filehash: filehash },
         async: false,
         success: function(result){
-            src = 'data:' + result[0].data + ';' + result[0].type + ',' + result[0].content;
-            console.log(src);
+            if(result[0])
+                src = 'data:' + result[0].data + ';' + result[0].type + ',' + result[0].content;
         },
         error: function () {
             alert('Error');
@@ -84,8 +84,8 @@ function msgStatus(id){
         data: { id: id },
         async: false,
         success: function(result){
-            status = result[0].status;
-            console.log(status);
+            if(result[0])
+                status = result[0].status;
         },
         error: function () {
             alert('Error');
@@ -96,30 +96,34 @@ function msgStatus(id){
 
 function conversa(phone, picture){
     $.ajax({
-        url: "/conversa",
-        dataType: "json",
-        data: { phone: phone },
         beforeSend: function() {
             $('#conversaConteudo').html(``);
             $('#conversaConteudo').append(`
             <div class="mask-loading">
                 <figure class="align-loading">
-                    <img class="ajax-spinner img-responsive" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Loading...">
+                    <img class="ajax-spinner img-responsive" src="images/loading.gif" style="margin: 0 auto; display: block;" alt="Loading...">
                 </figure>
             </div>
             `);
         },
+        url: "/conversa",
+        dataType: "json",
+        data: { phone: phone },        
         success: async function(result){
             $('#conversaConteudo').html(``);
             for(var i=0; i<=result.length; i++) {
 
-                var hour = result[i].date.substr(11,5);
-                var msg = result[i].msg;
-                var type = result[i].type;
-                var msgId = result[i].msgId;
+                if(result[i]){
+                    var hour = result[i].date.substr(11,5);
+                    var msg = result[i].msg;
+                    var type = result[i].type;
+                    var msgId = result[i].msgId;
+                    var me = result[i].me;
+                }
+
                 var src = '';
 
-                if(type == "ptt" || type == "audio" || type == "image")
+                if((type == "ptt" || type == "audio" || type == "image") && result[i])
                     src = await fileSrc(result[i].filehash)
 
                 if(msg == "Audio")
@@ -140,7 +144,7 @@ function conversa(phone, picture){
                 else
                     status = 'Erro';
 
-                if(result[i].me == 0)
+                if(me == 0)
                     $('#conversaConteudo').append(`
                         <div class="containerConv">
                             <img src="${picture}" alt="Avatar" style="width:100%;">
@@ -172,7 +176,6 @@ $(function(){
             url: "/perfil",
             dataType: "json",
             success: function(result){
-                console.log(result);
                 $('#tabela > table > thead').html(`
                 <tr>
                     <th>Foto</th>
@@ -182,7 +185,8 @@ $(function(){
                 </tr>
                 `);
                 for(var i=0; i<=result.length; i++) {
-                    $('#tabela > table > thead').append("<tr onclick='conversa(\"" + result[i].phone + "\", \"" + result[i].picture + "\")' data-toggle='modal' data-target='#conversa'><td><img src='" + result[i].picture + "' width='50px' height='50px' /></td><td>" + result[i].phone + "</td><td>" + result[i].nick + "</td><td>" + result[i].status + "</td></tr>");
+                    if(result[i])
+                        $('#tabela > table > thead').append("<tr onclick='conversa(\"" + result[i].phone + "\", \"" + result[i].picture + "\")' data-toggle='modal' data-target='#conversa'><td><img src='" + result[i].picture + "' width='50px' height='50px' /></td><td>" + result[i].phone + "</td><td>" + result[i].nick + "</td><td>" + result[i].status + "</td></tr>");
                 }
             },
             error: function () {

@@ -145,5 +145,13 @@ a:link{
     width: 225px; 
 	opacity: 1;
     max-width: 50%;
-  
+}
+
+/* Centralizar Modal */
+.modal-dialog {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	min-width: 30vw;
+	transform: translate(-50%, -50%) !important;
 }
