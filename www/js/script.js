@@ -66,8 +66,8 @@ function fileSrc(filehash){
         data: { filehash: filehash },
         async: false,
         success: function(result){
-            src = 'data:' + result[0].data + ';' + result[0].type + ',' + result[0].content;
-            console.log(src);
+            if(result[0])
+                src = 'data:' + result[0].data + ';' + result[0].type + ',' + result[0].content;
         },
         error: function () {
             alert('Error');
@@ -84,8 +84,8 @@ function msgStatus(id){
         data: { id: id },
         async: false,
         success: function(result){
-            status = result[0].status;
-            console.log(status);
+            if(result[0])
+                status = result[0].status;
         },
         error: function () {
             alert('Error');
@@ -94,26 +94,43 @@ function msgStatus(id){
     return status;
 }
 
+function imgError(image){
+    image.onerror = "";
+    image.src = "/images/user.svg";
+    return true;
+}
+
 function conversa(phone, picture){
     $.ajax({
+        beforeSend: function(){
+            $('#conversaConteudo').html(``);
+            $('#conversaConteudo').append(`
+            <div class="mask-loading">
+                <figure class="align-loading">
+                    <img class="ajax-spinner img-responsive" src="images/loading.gif" style="margin: 0 auto; display: block;" alt="Loading...">
+                </figure>
+            </div>
+            `);
+        },
         url: "/conversa",
         dataType: "json",
-        data: { phone: phone },
+        data: { phone: phone },        
         success: async function(result){
-            console.log(result);
             $('#conversaConteudo').html(``);
-            for(var i=0; i<=result.length; i++) {
+            for(var i=0; i<result.length; i++) {
 
-                var hour = result[i].date.substr(11,5);
-                var msg = result[i].msg;
-                var type = result[i].type;
-                var msgId = result[i].msgId;
+                if(result[i]){
+                    var hour = result[i].date.substr(11,5);
+                    var msg = result[i].msg;
+                    var type = result[i].type;
+                    var msgId = result[i].msgId;
+                    var me = result[i].me;
+                }
+
                 var src = '';
 
-                if(type == "ptt" || type == "audio" || type == "image")
+                if((type == "ptt" || type == "audio" || type == "image") && result[i])
                     src = await fileSrc(result[i].filehash)
-
-                console.log(src);
 
                 if(msg == "Audio")
                     msg = `<audio controls src="${src}"></audio>`;
@@ -122,9 +139,7 @@ function conversa(phone, picture){
                 else
                     msg = `<p>${msg}</p>`;
 
-                console.log(msgId);
                 var status = await msgStatus(msgId);
-                console.log(status);
 
                 if(status == '1')
                     status = 'Enviado';
@@ -135,10 +150,10 @@ function conversa(phone, picture){
                 else
                     status = 'Erro';
 
-                if(result[i].me == 0)
+                if(me == 0)
                     $('#conversaConteudo').append(`
                         <div class="containerConv">
-                            <img src="${picture}" alt="Avatar" style="width:100%;">
+                            <img src="${picture}" alt="Avatar" style="width:100%;" onerror="imgError(this);" >
                             ${msg}
                             <span class="time-right">Visualizado - ${hour}</span>
                         </div>
@@ -146,14 +161,14 @@ function conversa(phone, picture){
                 else
                     $('#conversaConteudo').append(`
                         <div class="containerConv darker">
-                            <img src="https://www.shareicon.net/data/128x128/2016/09/07/826440_chat_512x512.png" class="right" style="width:100%;">
+                            <img src="images/bot.svg" class="right" style="width:100%;">
                             <p>${msg}</p>
                             <span class="time-left">${status} - ${hour}</span>
                         </div>
                     `);
             }
         },
-        error: function () {
+        error: function(){
             alert('Error');
         }
     });
@@ -164,10 +179,13 @@ $(function(){
         e.preventDefault();
 
         $.ajax({
+            beforeSend: function(){
+                $("#searchLoading").show();
+            },
             url: "/perfil",
             dataType: "json",
             success: function(result){
-                console.log(result);
+                $("#searchLoading").hide();
                 $('#tabela > table > thead').html(`
                 <tr>
                     <th>Foto</th>
@@ -176,8 +194,9 @@ $(function(){
                     <th>Status</th>
                 </tr>
                 `);
-                for(var i=0; i<=result.length; i++) {
-                    $('#tabela > table > thead').append("<tr onclick='conversa(\"" + result[i].phone + "\", \"" + result[i].picture + "\")' data-toggle='modal' data-target='#conversa'><td><img src='" + result[i].picture + "' width='50px' height='50px' /></td><td>" + result[i].phone + "</td><td>" + result[i].nick + "</td><td>" + result[i].status + "</td></tr>");
+                for(var i=0; i<result.length; i++) {
+                    if(result[i])
+                        $('#tabela > table > thead').append("<tr onclick='conversa(\"" + result[i].phone + "\", \"" + result[i].picture + "\")' data-toggle='modal' data-target='#conversa'><td><img src='" + result[i].picture + "' width='50px' height='50px' onerror='imgError(this);' /></td><td>" + result[i].phone + "</td><td>" + result[i].nick + "</td><td>" + result[i].status + "</td></tr>");
                 }
             },
             error: function () {

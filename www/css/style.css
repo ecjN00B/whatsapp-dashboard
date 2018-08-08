@@ -129,3 +129,29 @@ a:link{
     float: left;
     color: #999;
 }
+
+/* Loading Css */
+.mask-loading{
+	z-index: 100;
+	opacity: 0.8;
+	width: 100%;
+	height: 100%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.align-loading{
+    z-index: 1000;
+    width: 225px; 
+	opacity: 1;
+    max-width: 50%;
+}
+
+/* Centralizar Modal */
+.modal-dialog {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	min-width: 30vw;
+	transform: translate(-50%, -50%) !important;
+}
