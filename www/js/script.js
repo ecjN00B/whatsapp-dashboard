@@ -117,7 +117,7 @@ function conversa(phone, picture){
         data: { phone: phone },        
         success: async function(result){
             $('#conversaConteudo').html(``);
-            for(var i=0; i<=result.length; i++) {
+            for(var i=0; i<result.length; i++) {
 
                 if(result[i]){
                     var hour = result[i].date.substr(11,5);
@@ -194,7 +194,7 @@ $(function(){
                     <th>Status</th>
                 </tr>
                 `);
-                for(var i=0; i<=result.length; i++) {
+                for(var i=0; i<result.length; i++) {
                     if(result[i])
                         $('#tabela > table > thead').append("<tr onclick='conversa(\"" + result[i].phone + "\", \"" + result[i].picture + "\")' data-toggle='modal' data-target='#conversa'><td><img src='" + result[i].picture + "' width='50px' height='50px' onerror='imgError(this);' /></td><td>" + result[i].phone + "</td><td>" + result[i].nick + "</td><td>" + result[i].status + "</td></tr>");
                 }
