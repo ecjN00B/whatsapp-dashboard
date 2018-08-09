@@ -208,6 +208,7 @@ $('#form1').bind('submit', function(e) {
     $.ajax({
         beforeSend: function(){
             $("#searchLoading").show();
+            $('#tabela > table > tbody').html(``);
         },
         url: "/perfil",
         dataType: "json",
