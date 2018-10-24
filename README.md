@@ -37,8 +37,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Elias de Carvalho Junior** - [ecjN00B][n00b]
-* **Lucas Henrique Andrade Rocha** - [lucashenrique18][lucashenrique]
+* **Elias de Carvalho Junior** - *Back-end / MySQL* - [ecjN00B][n00b]
+* **Lucas Henrique Andrade Rocha** - *Front-end / Back-end* - [lucashenrique18][lucashenrique]
 
 See also the list of [contributors](https://github.com/ecjN00B/whatsapp-dashboard/contributors) who participated in this project.
 
