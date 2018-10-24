@@ -31,8 +31,8 @@ router.get('/conversa', (req, res) =>{
   execSQLQuery(`SELECT * FROM coleta WHERE phone='${phone}'`, res);
 });
 
-router.get('/grafico1', (req, res) =>{
-  execSQLQuery('SELECT count(*) as qtdee from coleta WHERE me = 1', res);
+router.get('/grafico/volume', (req, res) =>{
+  execSQLQuery('SELECT phone, date from coleta WHERE me = 1', res);
 });
 
 router.get('/status', (req, res) =>{

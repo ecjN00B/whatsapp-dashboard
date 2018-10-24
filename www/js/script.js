@@ -189,14 +189,14 @@ function conversa(phone, picture){
 
     function graf1(){ 
          $.ajax({
-            url: "/grafico1",
+            url: "/grafico/volume",
             dataType: "json",
             success: function(result){
                 console.log(result);
                 alert(result[0].qtdee);
             },
             error: function (){
-                alert('Deu Pau nos Graficos!!');
+                alert('Erro');
             }
         });
      }
