@@ -38,6 +38,10 @@ router.get('/status', (req, res) =>{
   execSQLQuery(`SELECT * FROM envio WHERE msgId='${id}'`, res);
 });
 
+router.get('/grafico/volume', (req, res) =>{
+  execSQLQuery('SELECT phone, date from coleta WHERE me = 1', res);
+});
+
 router.get('/media', (req, res) =>{
   var filehash = req.query.filehash;
   execSQLQuery(`SELECT * FROM media WHERE filehash='${filehash}'`, res);
@@ -75,11 +79,6 @@ function execSQLQuery(sqlQry, res){
       connection.end();
   });
 }
-
-
-
-
-
 
 function Inserir(nmCampanha, tipoCampanha, desc, anMSG, tpMSG, txtMSG, aqvEnvio, vcard, arqContato, bdn, qtd, dat, respo){
   connection.connect();
