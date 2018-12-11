@@ -27,6 +27,9 @@ Before you can run the application, make sure that you have the following softwa
 #### From .env
 * Include .env in your project (See [template](docs/templates/.env-template))
 
+## To Do
+- [ ] Migrate front-end to Angular 4+
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
